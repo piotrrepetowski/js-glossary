@@ -13,5 +13,10 @@ var AnObject = function()
     {
         this.attribute = value;
     };
+
+    this.getThis = function()
+    {
+        return this;
+    };
 };
 
