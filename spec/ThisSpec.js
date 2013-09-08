@@ -52,19 +52,19 @@ describe('this', function() {
         expect(objectB.attribute).toBe(value);
     });
 
-    it('is window when set to null', function() {
+    it('is window when set to null - not in strict mode', function() {
         var object = new AnObject();
         expect(object.getThis.call(null)).toBe(window);
         expect(object.getThis.apply(null)).toBe(window);
     });
 
-    it('is window when set to undefined', function() {
+    it('is window when set to undefined - not in strict mode', function() {
         var object = new AnObject();
         expect(object.getThis.call(undefined)).toBe(window);
         expect(object.getThis.apply(undefined)).toBe(window);
     });
 
-    it('is object even for primitive types', function() {
+    it('is object even for primitive types - not in strict mode', function() {
         var object = new AnObject();
         expect(typeof object.getThis.call(1)).toEqual('object');
         expect(typeof object.getThis.call(true)).toEqual('object');
@@ -79,7 +79,7 @@ describe('this', function() {
         expect(eval('this')).toBe(this);
     });
 
-    it('can be binded using bind function', function() {
+    it('can be binded using bind function (since ECMAScript 5)', function() {
         var objectA = new AnObject();
         var objectB = new AnObject();
         var bindedGetThis = objectA.getThis.bind(objectB);
@@ -88,5 +88,15 @@ describe('this', function() {
         expect(bindedGetThis.apply(objectA)).toBe(objectB);
         objectA.bindedGetThis = bindedGetThis;
         expect(objectA.bindedGetThis()).toBe(objectB);
+    });
+
+    it('is not accessible for closure', function() {
+        var object = new AnObject();
+        expect(object.getThisFromWrongClosure()).not.toBe(object);
+    });
+
+    it('can be accessible for closure when passed through variable', function() {
+        var object = new AnObject();
+        expect(object.getThisFromRightClosure()).toBe(object);
     });
 });
