@@ -9,7 +9,7 @@ var AnObject = function()
 {
     this.attribute = undefined;
 
-    this.setAttribute = function (value)
+    this.setAttribute = function(value)
     {
         this.attribute = value;
     };
