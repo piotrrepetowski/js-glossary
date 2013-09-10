@@ -15,6 +15,7 @@ describe('this', function() {
         var value = 15;
         object.setAttribute(value);
         expect(object.attribute).toBe(value);
+        expect(attribute).toBeUndefined();
     });
 
     it('is set to window when calling member function like this: var f = object.fooFunction; f();', function() {
@@ -90,8 +91,9 @@ describe('this', function() {
         expect(objectA.bindedGetThis()).toBe(objectB);
     });
 
-    it('is not accessible for closure', function() {
+    it('is not accessible for closure and is window', function() {
         var object = new AnObject();
+        expect(object.getThisFromWrongClosure()).toBe(window);
         expect(object.getThisFromWrongClosure()).not.toBe(object);
     });
 
