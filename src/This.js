@@ -18,5 +18,24 @@ var AnObject = function()
     {
         return this;
     };
+
+    this.getThisFromWrongClosure = function()
+    {
+        var closure = function() {
+            return this;
+        }
+
+        return closure();
+    };
+
+    this.getThisFromRightClosure = function()
+    {
+        var self = this;
+        var closure = function() {
+            return self;
+        }
+
+        return closure();
+    };
 };
 
