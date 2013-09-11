@@ -38,4 +38,3 @@ var AnObject = function()
         return closure();
     };
 };
-
