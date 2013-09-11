@@ -23,7 +23,7 @@ var AnObject = function()
     {
         var closure = function() {
             return this;
-        }
+        };
 
         return closure();
     };
@@ -33,7 +33,7 @@ var AnObject = function()
         var self = this;
         var closure = function() {
             return self;
-        }
+        };
 
         return closure();
     };
