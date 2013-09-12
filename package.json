@@ -5,7 +5,7 @@
   	"type": "git",
     "url": "https://github.com/piotrrepetowski/js-glossary.git"
   },
-  "author": "Piotr Repetowski <piotr.repetowski@gmail.com> & Mirosław Filip <mirfilip@gmail.com>"
+  "author": "Piotr Repetowski <piotr.repetowski@gmail.com> & Mirosław Filip <mirfilip@gmail.com>",
   "devDependencies": {
     "karma": "~0.8",
     "karma-jasmine": "*"
