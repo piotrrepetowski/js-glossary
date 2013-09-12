@@ -18,7 +18,7 @@
       logLevel: config.LOG_INFO,
       autoWatch: false,
       // browsers: ['PhantomJS'],
-      captureTimeout: 60000,
+      captureTimeout: 60000
       // singleRun: true
     });
   };
