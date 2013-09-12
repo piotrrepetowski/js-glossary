@@ -1,9 +1,19 @@
 {
   "name": "js-glossary",
+  "description": "Jasmine tests that describe JavaScripts features.",
+  "repository": {
+  	"type": "git",
+    "url": "https://github.com/piotrrepetowski/js-glossary.git"
+  },
+  "author": "Piotr Repetowski <piotr.repetowski@gmail.com> & Mirosław Filip <mirfilip@gmail.com>"
   "devDependencies": {
-    "karma": "~0.8"
+    "karma": "~0.8",
+    "karma-jasmine": "*"
+  },
+  "bin": {
+  	"karma": "./node_modules/.bin/karma"
   },
   "scripts": {
-   "test": "./node_modules/.bin/karma start CI/karma.config.js --single-run --browsers PhantomJS"
+   "test": "karma start CI/karma.config.js --single-run --browsers PhantomJS"
   }
 }
