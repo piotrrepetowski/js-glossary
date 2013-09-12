@@ -1,3 +1,4 @@
+  
   module.exports = function(config) {
     config.set({
       basePath: '.',
@@ -6,10 +7,10 @@
       'spec/ThisSpec.js',
       'spec/ObjectsSpec.js',
       'spec/PrototypeSpec.js',
-      'spec/TypeOfSpec.js'
-      'spec/InstanceOfSpec.js'
-      'spec/ConstructorSpec.js'
-      'spec/ConstructorValidationSpec.js'
+      'spec/TypeOfSpec.js',
+      'spec/InstanceOfSpec.js',
+      'spec/ConstructorSpec.js',
+      'spec/ConstructorValidationSpec.js',
       'spec/CustomMatchersSpec.js'
       ],
       reporters: ['dots'],
