@@ -1,4 +1,4 @@
-basePath = '.';
+basePath = '..';
 
 files = [
     JASMINE,
@@ -15,9 +15,11 @@ runnerPort = 9100;
 
 colors = true;
 
-logLevel = config.LOG_INFO;
+logLevel = LOG_INFO;
 
 autoWatch = false;
+
+browsers = ['PhantomJS'];
 
 captureTimeout = 60000;
 
