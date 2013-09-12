@@ -10,6 +10,6 @@
     "karma": "~0.8"
   },
   "scripts": {
-    "test": "./node_modules/.bin/karma start CI/karma.config.js --single-run --browsers PhantomJS"
+    "test": "./node_modules/.bin/karma start CI/karma.config.js --single-run --no-auto-watch --browsers Firefox"
   }
 }

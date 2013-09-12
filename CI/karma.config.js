@@ -17,10 +17,10 @@ colors = true;
 
 logLevel = LOG_INFO;
 
-autoWatch = false;
+autoWatch = true;
 
-browsers = ['PhantomJS'];
+browsers = ['Firefox'];
 
 captureTimeout = 60000;
 
-singleRun = true;
+singleRun = false;
