@@ -13,7 +13,7 @@ describe('Objects', function() {
 
         describe('construct function', function() {
             var Foo = function() {
-                this.foo = function bar() {return 'bar';};
+                this.foo = function() {return 'bar';};
             };
             var object = new Foo();
 
@@ -28,6 +28,25 @@ describe('Objects', function() {
             it('creates instanceof Object as well', function() {
                 expect(object instanceof Object).toBe(true);
             });
+
+            it('can polute window object whe using without new', function() {
+                var object = Foo();
+                expect(object).toBeUndefined();
+                expect(window.foo).toBeDefined();
+            });
+        });
+
+        describe('Object.create', function() {
+            var Foo = function() {
+                this.foo = function() {return 'bar';};
+            };
+
+            it('is a way of creating objects', function() {
+                var object = Object.create(Object.prototype, {
+                    foo: function { return 'bar'; }
+                });
+                expect(object.foo).toBeDefined();
+            })
         });
 
         describe('returning object in construct function', function() {
