@@ -43,7 +43,7 @@ describe('Objects', function() {
 
             it('is a way of creating objects', function() {
                 var object = Object.create(Object.prototype, {
-                    foo: function { return 'bar'; }
+                    foo: function() { return 'bar'; }
                 });
                 expect(object.foo).toBeDefined();
             })
