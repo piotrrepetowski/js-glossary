@@ -8,16 +8,9 @@ describe('Global objects', function() {
 		expect(circle.area()).toBeGreaterThan(78);
 
 		var areaFn = circle.area; // this is NOT a call, I take a reference to "member function"
-		expect(isNaN(areaFn()).toBeTrue(); // NaN ?
+		expect(isNaN(areaFn())).toEqual(true); // NaN ?
 
 		window.radius = 1;
-		expect(areaFn()).toBeEqual(3.1415);
-
-		window.area = function()
-		{
-			return 'You though I will calculate anything ?. No way !';
-		};
-
-		expect(areaFn()).toBeEqual('You though I will calculate anything ?. No way !');
+		expect(areaFn()).toEqual(Math.PI);
 	});
 });
