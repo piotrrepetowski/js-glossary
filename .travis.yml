@@ -5,4 +5,5 @@ node_js:
 
 before_script:
   - export DISPLAY=:99.0
+  - export CHROME_BIN=/usr/bin/chromium-browser
   - sh -e /etc/init.d/xvfb start
