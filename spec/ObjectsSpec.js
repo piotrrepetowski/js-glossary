@@ -13,7 +13,7 @@ describe('Objects', function() {
 
         describe('construct function', function() {
             var Foo = function() {
-                this.foo = function bar() {return 'bar';};
+                this.foo = function() {return 'bar';};
             };
             var object = new Foo();
 
@@ -28,6 +28,88 @@ describe('Objects', function() {
             it('creates instanceof Object as well', function() {
                 expect(object instanceof Object).toBe(true);
             });
+
+            it('can polute window object whe using without new', function() {
+                var object = Foo();
+                expect(object).toBeUndefined();
+                expect(window.foo).toBeDefined();
+            });
+        });
+
+        describe('Object.create', function() {
+            var foo = {
+                foo: function() {return 'bar';}
+            };
+
+            it('is a way of creating objects', function() {
+                var object = Object.create(foo);
+                expect(object.foo).toBeDefined();
+            });
+
+            it('allows to define enumerable value properties', function() {
+                var object = Object.create({}, {
+                    foo: {value: 12, enumerable: false},
+                    bar: {value: 5, enumerable: true}
+                });
+
+                var fooFound = false;
+                var barFound = false;
+                
+                for (var i in object)
+                {
+                    if (i === "foo")
+                    {
+                        fooFound = true;
+                    }
+                    if (i === "bar")
+                    {
+                        barFound = true;
+                    }
+                }
+                
+                expect(fooFound).toBe(false);
+                expect(barFound).toBe(true);
+            });
+
+            it('allows to define writable value properties', function() {
+                var object = Object.create({}, {
+                    foo: {value: 12, writable: false},
+                    bar: {value: 5, writable: true}
+                });
+
+                object.foo = 10;
+                object.bar = 9;
+                expect(object.foo).toBe(12);
+                expect(object.bar).toBe(9);
+            });
+
+            it('allows to define configurable value properties', function() {
+                var object = Object.create({}, {
+                    foo: {value: 12, configurable: false},
+                    bar: {value: 5, configurable: true}
+                });
+
+                expect(delete object.foo).toBe(false);
+                expect(delete object.bar).toBe(true);
+            });
+
+            it('allows to define configurable getter-and-setter properties', function() {
+                var object = Object.create({}, {
+                    bar: {
+                        configurable: false,
+                        get: function() { return "bar"; },
+                        set: function(value) { console.log("set: " + value)}
+                    },
+                    foo: {
+                        configurable: true,
+                        get: function() { return "foo"; },
+                        set: function(value) { console.log("set: " + value)}
+                    }
+                });
+
+                expect(delete object.bar).toBe(false);
+                expect(delete object.foo).toBe(true);
+            });
         });
 
         describe('returning object in construct function', function() {
@@ -39,7 +121,7 @@ describe('Objects', function() {
                 };
             };
 
-            it('can be used withoud new keyword', function() {
+            it('can be used without new keyword', function() {
                 expect(Foo()).toEqual(jasmine.any(Object));
             });
 
