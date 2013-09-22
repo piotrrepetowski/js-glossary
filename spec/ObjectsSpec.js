@@ -206,4 +206,13 @@ describe('Objects', function() {
             expect(Foo.staticAttribute).not.toEqual(staticAttributeValue);
         });
     });
+
+    describe('function is an object as well !', function(){
+        it('using new operator to create a function', function(){
+            var iAmAFunctionToo = new Function('foo', 'return 13;'); // I still don't know how to pass args like that
+
+            expect(typeof iAmAFunctionToo).toBe("function"); // what ? I used new. Another quirk.
+            expect(iAmAFunctionToo()).toEqual(13);
+        });
+    });
 });
