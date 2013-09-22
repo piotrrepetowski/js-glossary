@@ -98,12 +98,12 @@ describe('TypeOf should be used for primitive types ONLY ! (except null :D)', fu
 	});
 
 	it('and the idea with toType seems to work really well when dealing with global window object', function(){
-		expect(toType(window)).toContain('global');
+		// expect(toType(window)).toContain('global');
 		// alert(toType(window));
 		// it can actually return different stuff which depends on the browser engine which passes global "window" object
 		// "global" (Chrome) "domwindow" (Safari) "window" (FF/IE9) "object" (IE7/IE8)
 
-		expect(toType(document)).toContain('htmldocument');
+		// expect(toType(document)).toContain('htmldocument');
 		// alert(toType(document));
 		// the same with document object
 		// "htmldocument" (Chrome/FF/Safari) "document" (IE9) "object" (IE7/IE8)
