@@ -12,6 +12,9 @@ var	typesNotPreservingConstructor = [
 	Math,
 	new Object,	{},
 	new RegExp,	/(?:)/,
+	new Boolean,
+	new Number,
+	new String
 ];
 
 var typesPreservingConstructor = [

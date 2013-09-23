@@ -33,12 +33,6 @@ describe('Constructor property returns reference to constructor function', funct
 		expect(mirek.constructor).toNotBe(Object);
 	});
 
-	it('for custom types', function(){
-		var mirek = new Person("Mirek");
-
-		expect(mirek.constructor).toBe(Person);
-	});
-
 	it('unfortunately it works with prototype overwriting too...', function(){
 		var piotrek = new Person("Piotr");
 		expect(piotrek.constructor).toBe(Person); 
@@ -56,6 +50,20 @@ describe('Constructor property returns reference to constructor function', funct
 			typeUnderTest.constructor = newDummyConstructor;
 
 			expect(typeUnderTest.constructor).toBe(newDummyConstructor);
+		}
+	});
+
+	it('types preserving the constructor', function(){
+		var primitives = [[true, Boolean], [1, Number], ['string', String]];
+
+		for (var i = 0; i < primitives.length; i++) {
+			var typeUnderTest = primitives[i][0];
+			var expectedConstructorFn = primitives[i][1];
+
+			typeUnderTest.constructor = newDummyConstructor;
+
+			expect(typeUnderTest.constructor).not.toBe(newDummyConstructor);
+			expect(typeUnderTest.constructor).toBe(expectedConstructorFn);
 		}
 	});
 });
