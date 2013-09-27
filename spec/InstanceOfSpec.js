@@ -2,6 +2,7 @@ describe('InstanceOf in comparison to constructor property', function() {
 	
 	// Conclusion: you should use instanceof to check whether a class is properly inherited
 	// you SHOULD TOTALLY STOP using instanceof to check primitve types !
+	// more: http://javascript.crockford.com/remedial.html
 
 	it('follows prototype chain', function(){
 		var mirek = new Person("Mirek");
