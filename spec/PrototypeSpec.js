@@ -120,4 +120,35 @@ describe('prototype', function() {
             expect(Object.prototype).toEqual(jasmine.any(Object));
         });
     });
+
+    describe('constructor', function() {
+        var Foo = function() { this.foo = 'foo'; };
+
+        var Bar = function() { this.bar = 'bar'; };
+        Bar.prototype = new Foo();
+
+        it('is defined in object', function() {
+            expect(Object.prototype.constructor).toBe(Object);
+        });
+
+        it('is not defined in object', function() {
+            var foo = new Foo();
+            expect(foo.hasOwnProperty('constructor')).toBe(false);
+        });
+
+        it('is defined in prototype', function() {
+            var foo = new Foo();
+            expect(Object.getPrototypeOf(foo).hasOwnProperty('constructor')).toBe(true);
+        });
+
+        it('will be overwritten during inheritance', function() {
+            var bar = new Bar();
+            expect(bar.constructor).toBe(Foo);
+        });
+
+        it('does nothing wiht inheritance', function() {
+            var bar = new Bar();
+            expect(bar.foo).toBe('foo');
+        });
+    });
 });
