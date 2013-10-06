@@ -1,20 +1,36 @@
 describe('prototype', function() {
     describe('Object internal [[Prototype]] attribute', function() {
+        it('is not accessible through Prototype', function() {
+            expect({}.Prototype).toBeUndefined();
+        });
+
+        it('is not accessible through [[Prototype]] attribute', function() {
+            var object = {};
+            expect({}['[[Prototype]]']).toBeUndefined();
+        });
+
+        it('is accessible through non-standard __proto__ attribute', function() {
+            expect({}.__proto__).toBeDefined();
+        });
+
         it('is accessible through Object.getPrototypeOf()', function() {
-            expect(Object.getPrototypeOf({})).toEqual({});
+            expect(Object.getPrototypeOf({})).toBeDefined();
         });
 
         it('is set to value of Object.prototype for new objects', function() {
             expect(Object.getPrototypeOf({})).toBe(Object.prototype);
         });
 
+        it('is set to value of Array.prototype for arrays', function() {
+            expect(Object.getPrototypeOf([])).toBe(Array.prototype);
+        });
+
+        it('is set to value of Function.prototype for functions', function() {
+            expect(Object.getPrototypeOf(function() { return 'foo'; })).toBe(Function.prototype);
+        });
+
         it('is set to null for Object.prototype', function() {
             expect(Object.getPrototypeOf(Object.prototype)).toBe(null);
-        });
-    
-        it('is set to Function.prototype for new functions', function() {
-            var foo = function() {};
-            expect(Object.getPrototypeOf(foo)).toEqual(Function.prototype);
         });
 
         it('is set to Object for Function.prototype', function() {
@@ -22,31 +38,25 @@ describe('prototype', function() {
         });
 
         it('is set to Bar if Foo inherits from Bar', function() {
-            var person = {};
-
             var fooValue = 'bar';
 
             var alien = {
                 foo: fooValue
             };
 
-            // __proto__ is non standard attribute
-            person.__proto__ = alien;
+            person = Object.create(alien);
 
             expect(Object.getPrototypeOf(person)).toEqual(alien);
         });
 
         it('can be verified through isPrototypeOf', function() {
-            var person = {};
-
             var fooValue = 'bar';
 
             var alien = {
                 foo: fooValue
             };
 
-            // __proto__ is non standard attribute
-            person.__proto__ = alien;
+            person = Object.create(alien);
 
             expect(alien.isPrototypeOf(person)).toBe(true);
         });
@@ -56,15 +66,12 @@ describe('prototype', function() {
 
             var grandfather = { family: familyValue };
 
-            var father = {};
-            // __proto__ is non standard attribute
-            father.__proto__ = grandfather;
+            var father = Object.create(grandfather);
 
-            var son = {};
-            // __proto__ is non standard attribute
-            son.__proto__ = father;
+            var son = Object.create(father);
 
             expect(son.family).toBe(familyValue);
+            expect(son.hasOwnProperty('family')).toBe(false);
         });
 
         it('can be replaced dynamically', function() {
@@ -89,21 +96,28 @@ describe('prototype', function() {
     });
 
     describe('Function prototype attribute', function() {
+        var Foo = function() { this.foo = 'bar'; };
+
         it('is an attribute of each funciton', function() {
-            var foo = function() {};
-            expect(foo.prototype).toBeDefined();
+            expect(Foo.prototype).toBeDefined();
         });
 
         it('is not a function internal [[Prototype]]', function() {
-            var foo = function() {};
-            expect(Object.getPrototypeOf(foo)).not.toEqual(foo.prototype);
+            expect(Object.getPrototypeOf(Foo)).not.toEqual(Foo.prototype);
         });
 
         it('is used to set internal [[Prototype]] for objects created by function', function() {
-            var Foo = function() {};
             var fooObject = new Foo();
 
             expect(Object.getPrototypeOf(fooObject)).toBe(Foo.prototype);
+        });
+
+        it('is set to Object by default', function() {
+            expect(Foo.prototype).toEqual(jasmine.any(Object));
+        });
+
+        it('is set to Object for Object function', function() {
+            expect(Object.prototype).toEqual(jasmine.any(Object));
         });
     });
 });
