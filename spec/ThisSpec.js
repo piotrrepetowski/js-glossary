@@ -67,9 +67,9 @@ describe('this', function() {
 
     it('is object even for primitive types - not in strict mode', function() {
         var object = new AnObject();
-        expect(typeof object.getThis.call(1)).toEqual('object');
-        expect(typeof object.getThis.call(true)).toEqual('object');
-        expect(typeof object.getThis.call("foo")).toEqual('object');
+        expect(object.getThis.call(1) instanceof Object).toBe(true);
+        expect(object.getThis.call(true) instanceof Object).toBe(true);
+        expect(object.getThis.call("foo") instanceof Object).toBe(true);
     });
 
     it('is window in indirect eval call', function() {
@@ -92,13 +92,13 @@ describe('this', function() {
     });
 
     it('is not accessible for closure and is window', function() {
-        var object = new AnObject();
-        expect(object.getThisFromWrongClosure()).toBe(window);
-        expect(object.getThisFromWrongClosure()).not.toBe(object);
+        var obj = new AnObject();
+        expect(obj.getThisFromWrongClosure()).toBe(window);
+        expect(obj.getThisFromWrongClosure()).not.toBe(obj);
     });
 
     it('can be accessible for closure when passed through variable', function() {
-        var object = new AnObject();
-        expect(object.getThisFromRightClosure()).toBe(object);
+        var obj = new AnObject();
+        expect(obj.getThisFromRightClosure()).toBe(obj);
     });
 });
